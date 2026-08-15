@@ -2,18 +2,26 @@ import "./App.css";
 import NoteCard from "./components/NoteCard";
 import NoteForm from "./components/NoteForm";
 import Home from "./pages/Home";
-import MemoList from "./pages/MemoList";
 import Header from "./pages/Header";
 import Footer from "./pages/Footer";
 import { Route, Routes } from "react-router";
 import { useNotes } from "./hooks/useNotes";
+import NoteList from "./pages/NoteList";
+import NoteDetails from "./pages/NoteDetails";
 
 function App() {
-  const { notes, addNote, deleteNote, togglePin } = useNotes();
+  const noteStore = useNotes();
 
   return (
     <>
-      <Header />
+      <Routes>
+        <Route path="/" element={<NoteList {...noteStore} />} />
+        <Route
+          path="/notes/:noteId"
+          element={<NoteDetails notes={noteStore.notes} />}
+        />
+      </Routes>
+      {/* <Header />
       <Routes className="note-app">
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<NoteForm onAdd={addNote} />} />
@@ -33,7 +41,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
