@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
@@ -46,32 +46,55 @@ function loadInitialNotes() {
 }
 
 function App() {
-  const [notes, setNotes] = useState(loadInitialNotes);
+  // const [notes, setNotes] = useState(loadInitialNotes);
+  const [notes, dispatch] = useReducer(
+    notesReducer,
+    undefined,
+    loadInitialNotes,
+  );
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
   }, [notes]);
 
-  function togglePin(id) {
-    setNotes((currentNotes) =>
-      currentNotes.map((note) =>
-        note.id === id ? { ...note, pinned: !note.pinned } : note,
-      ),
-    );
+  function notesReducer(notes, action) {
+    switch (action.type) {
+      case "ADD":
+        return [action.note, ...notes];
+      case "DELETE":
+        return notes.filter((note) => note.id !== action.id);
+      case "PINTOGGLE":
+        return notes.map((note) =>
+          note.id === action.id ? { ...note, pinned: !note.pinned } : note,
+        );
+      default:
+        return notes;
+    }
   }
 
   function addNote(newNote) {
-    setNotes((currentNotes) => [...currentNotes, newNote]);
+    // setNotes((currentNotes) => [...currentNotes, newNote]);
+    dispatch({ type: "ADD", note: newNote });
   }
 
   function deleteNote(id) {
-    setNotes((currentNotes) => currentNotes.filter((note) => note.id !== id));
+    // setNotes((currentNotes) => currentNotes.filter((note) => note.id !== id));
+    dispatch({ type: "DELETE", id });
   }
+
+  function togglePin(id) {
+    // setNotes((currentNotes) =>
+    //   currentNotes.map((note) =>
+    //     note.id === id ? { ...note, pinned: !note.pinned } : note,
+    //   ),
+    // );
+    dispatch({ type: "PINTOGGLE", id });
+  }
+
   return (
     <>
       <Header />
       <Routes className="note-app">
-        {/* <main > */}
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<NewMemo addNote={addNote} />} />
         <Route
@@ -89,7 +112,6 @@ function App() {
             </div>
           }
         />
-        {/* </main> */}
       </Routes>
       <Footer />
     </>
