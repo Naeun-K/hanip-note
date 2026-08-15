@@ -3,7 +3,7 @@ import React from "react";
 export default function Home() {
   return (
     <div>
-      {" "}
+      <p>REACT MINI PROJECT</p>
       <h1>
         {" "}
         <span>
@@ -22,6 +22,7 @@ export default function Home() {
         </span>{" "}
         한입노트
       </h1>
+      <p>배운 개념을 한입씩 정리하는 나만의 메모장</p>
     </div>
   );
 }
