@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MemoList({ notes, togglePin, deleteNote }) {
   return (
-    <div>
+    <ul>
       {notes.map((note) => (
         <NoteCard
           key={note.id}
@@ -11,6 +11,6 @@ export default function MemoList({ notes, togglePin, deleteNote }) {
           onDelete={() => deleteNote(note.id)}
         />
       ))}
-    </div>
+    </ul>
   );
 }
