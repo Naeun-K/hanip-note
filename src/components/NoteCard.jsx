@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import PinIcon from "./PinIcon";
 import { CardStyle } from "../styles/CardStyle";
+import DeleteModal from "./DeleteModal";
 
 export default function NoteCard({
   title,
@@ -9,6 +10,7 @@ export default function NoteCard({
   onTogglePin,
   onDelete,
 }) {
+  const [isOpen, SetIsOpen] = useState(false);
   return (
     <CardStyle pinned={pinned}>
       <header className="card-header">
@@ -24,12 +26,15 @@ export default function NoteCard({
         <button
           type="button"
           className="btn-style delete-button"
-          onClick={onDelete}
+          onClick={() => SetIsOpen(true)}
         >
           삭제
         </button>
       </header>
       <p>{body}</p>
+      {isOpen && (
+        <DeleteModal onDelete={onDelete} onClose={() => SetIsOpen(false)} />
+      )}
     </CardStyle>
   );
 }
