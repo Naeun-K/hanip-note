@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router";
+import { NoteDetailStyle } from "../styles/NoteDetailStyle";
 
 export default function NoteDetails({ notes }) {
   const { noteId } = useParams();
@@ -25,12 +26,12 @@ export default function NoteDetails({ notes }) {
     );
   }
   return (
-    <main className="note-detail">
+    <NoteDetailStyle className="note-detail">
       <Link to="/" className="back-link">
         ← 목록으로
       </Link>
-      <article>
-        <div>
+      <article className="detail-desc">
+        <div className="svg-container">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -44,9 +45,11 @@ export default function NoteDetails({ notes }) {
           </svg>
           <span className="detail-sticker">NOTE</span>
         </div>
-        <h1>{note.title}</h1>
-        <p>{note.body}</p>
+        <div className="desc-container">
+          <h1>{note.title}</h1>
+          <p>{note.body}</p>
+        </div>
       </article>
-    </main>
+    </NoteDetailStyle>
   );
 }
