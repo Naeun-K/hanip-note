@@ -17,7 +17,10 @@ export default function NoteForm({ onAdd, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      titleRef.current?.focus();
+      return;
+    }
 
     const newNote = {
       id: crypto.randomUUID(),
@@ -27,9 +30,7 @@ export default function NoteForm({ onAdd, onClose }) {
     };
 
     onAdd(newNote);
-    setTitle("");
-    setBody("");
-    titleRef.current?.focus();
+    onClose();
   }
 
   return createPortal(
