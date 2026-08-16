@@ -8,19 +8,47 @@ export const NoteApp = styled.main(({ theme }) => ({
   "& .note-intro": {
     display: "flex",
     flexDirection: "column",
-    gap: "50px",
+    gap: "30px",
   },
   "& .note-header": {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
     "& h1": {
       padding: "5px",
       color: theme.colors.text,
       fontSize: "2.8rem",
     },
+    "& .note-header-desc": {
+      display: "flex",
+      justifyContent: "space-between",
+    },
     "& p": {
       fontSize: "1.1rem",
       letterSpacing: "-0.025em",
       color: theme.colors.body,
+      wordBreak: "keep-all",
       lineHeight: 1.75,
+      width: "40%",
+    },
+    "& .open-modal-btn": {
+      width: "25%",
+      display: "flex",
+      gap: "5px",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "10px 20px",
+      backgroundColor: theme.colors.button,
+      borderRadius: theme.radius.control,
+      border: `1px solid ${theme.colors.border}`,
+      fontSize: "0.9rem",
+      wordBreak: "keep-all",
+      cursor: "pointer",
+      transition: "background-color 0.5s, transform 0.5s",
+    },
+    "& .open-modal-btn:hover": {
+      backgroundColor: "#fcc7fe",
+      transform: "translateY(-5px)",
     },
   },
   "& .note-logo": {

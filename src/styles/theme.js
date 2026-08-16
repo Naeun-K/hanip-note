@@ -8,6 +8,7 @@ export const theme = {
     pin: "#9a8fa2",
     accent: "#f6cddd",
     accentText: "#9a667c",
+    button: "#ffecf3",
   },
   space: {
     card: "24px",

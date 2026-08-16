@@ -43,18 +43,17 @@ export const CardStyle = styled.article(({ pinned, theme }) => ({
     background: "rgb(255 255 255 / 62%)",
     color: theme.colors.pin,
     cursor: "pointer",
-    transition: "background 0.5s",
+    transition: "background 0.5s, color 0.5s",
     '&[aria-pressed="true"]': {
       background: theme.colors.accent,
       color: theme.colors.accentText,
     },
   },
   "& .btn-style:hover": {
+    color: theme.colors.text,
     background: `
           radial-gradient(circle at 8% 4%,
             rgb(246 205 221 / 62%), transparent 24rem),
-          radial-gradient(circle at 92% 12%,
-            rgb(204 236 223 / 68%), transparent 22rem),
           ${theme.colors.page}
         `,
   },
